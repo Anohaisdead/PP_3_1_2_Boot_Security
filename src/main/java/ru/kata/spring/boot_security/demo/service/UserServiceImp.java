@@ -37,7 +37,6 @@ public class UserServiceImp implements UserDetailsService, UserService {
     }
 
     @Override
-    @Transactional
     public List<User> allUsers() {
         return userRepository.findAll();
     }
@@ -68,7 +67,6 @@ public class UserServiceImp implements UserDetailsService, UserService {
     }
 
     @Override
-    @Transactional
     public User getById(Long id) {
         return userRepository.findById(id).orElse(null);
     }
