@@ -12,7 +12,7 @@ public class Role implements GrantedAuthority {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
     @Column(name = "name")
     private String name;
 
@@ -30,7 +30,7 @@ public class Role implements GrantedAuthority {
         this.name = name;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
@@ -38,7 +38,7 @@ public class Role implements GrantedAuthority {
         return name;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -59,12 +59,16 @@ public class Role implements GrantedAuthority {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Role role1 = (Role) o;
-        return id.equals(role1.id) && Objects.equals(name, role1.name);
+
+        Role role = (Role) o;
+
+        return name.equals(role.name) && (id == role.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name);
+        int result = id;
+        result = 31 * result + name.hashCode();
+        return result;
     }
 }
